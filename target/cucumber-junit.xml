@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="3.272251">
+<testcase classname="Verify Job Search API" name="Verify Searching For Positions With Description." time="3.272251">
+<system-out><![CDATA[When From git hub job search API call Salesforce Engineer API...............passed
+Then From API response , validate all search keywords Salesforce Engineer is displayed..passed
+]]></system-out>
+</testcase>
+</testsuite>
+ayed..passed
+]]></system-out>
+</testcase>
+</testsuite>
+te all search keywords Chicago is displayed.(src/test/resources/cucumber-features/JobsSearch.feature:41)&#10;"><![CDATA[When From git hub job search API call with java as description, location Chicago and false as full time..passed
+Then From API response , validate all search keywords Chicago is displayed..failed
+
+StackTrace:
+java.lang.AssertionError: Not Found : Chicago
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at cucumberSteps.JobsSearch.verify(JobsSearch.java:99)
+	at ✽.From API response , validate all search keywords Chicago is displayed.(src/test/resources/cucumber-features/JobsSearch.feature:41)
+]]></failure>
+</testcase>
+</testsuite>

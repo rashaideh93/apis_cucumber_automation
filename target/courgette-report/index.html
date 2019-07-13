@@ -1,0 +1,3869 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Courgette-JVM Report</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Plugin CSS -->
+    <link href="css/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/core.min.css" rel="stylesheet">
+
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <li class="navbar-brand" href="#">Courgette-JVM Report</li>
+</nav>
+
+<div class="content-wrapper">
+
+    <div class="container-fluid">
+        <!-- Result Cards -->
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 mb-3">
+                <div class="card text-white bg-primary o-hidden h-100">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="mr-10">
+                            Total Scenarios
+                        </div>
+                    </div>
+                    <div class="card-footer text-white clearfix small z-1" style="cursor: pointer;"
+                         onclick="setSearch('');">
+                        <span class="float-left text-white" id="card-total">37</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 mb-3">
+                <div class="card text-white bg-success o-hidden h-100">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="mr-10">
+                            Passed Scenarios
+                        </div>
+                    </div>
+                    <div class="card-footer text-white clearfix small z-1" style="cursor: pointer;"
+                         onclick="setSearch('Passed');">
+                        <span class="float-left text-white" id="card-passed">30</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 mb-3">
+                <div class="card text-white bg-danger o-hidden h-100">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="mr-10">
+                            Failed Scenarios
+                        </div>
+                    </div>
+                    <div class="card-footer text-white clearfix small z-1" style="cursor: pointer;"
+                         onclick="setSearch('Failed');">
+                        <span class="float-left text-white" id="card-failed">7</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 mb-3">
+                <div class="card text-white bg-warning o-hidden h-100">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="mr-10">
+                            Re-run Scenarios
+                        </div>
+                    </div>
+                    <div class="card-footer text-white clearfix small z-1">
+                        <span class="float-left" id="card-rerun">7</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fa"></i>Run Information
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                Timestamp:
+                            </div>
+                            <div>2019-07-13T13:21:09.733262Z</div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-sm-3">
+                                Duration:
+                            </div>
+                            <div>1 min, 51 sec</div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-sm-3">
+                                Parallel Threads:
+                            </div>
+                            <div>4</div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-sm-3">
+                                Parallel Run Level:
+                            </div>
+                            <div>Scenario</div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-sm-3">
+                                Re-run Failed:
+                            </div>
+                            <div>true</div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-sm-3">
+                                Cucumber Tags:
+                            </div>
+                            <div>Not provided</div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-sm-3">
+                                Cucumber Features:
+                            </div>
+                            <div>src/test/resources/cucumber-features/</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="mt-3 mb-3">
+                        <canvas id="pieChart" width="100%" height="321"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Table -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i>
+                Results
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th width="95%">Scenario Name</th>
+                            <th>Result</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#8ad49f4f-cb72-4f26-8dd0-377fb525b447">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#592b5638-a273-4fe3-aaf1-596aa5ae8810">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#da21b69e-cb5f-45e1-9552-f20efb951f46">Verify Searching For Positions With Lat and Long.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#046f8dd8-cc37-44a2-8a36-8f2bf8c6a5a0">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#e2490cd5-e620-4edb-8b07-80f3021316be">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#ca20a321-9569-495c-82fa-9cf7d86a131b">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#72fcaa30-aa4b-46f6-b584-62dbad630694">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#f9ccf10e-6f13-476d-a71c-0fb044c3dbc0">Verify Searching For Positions With Lat and Long.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#f1fe7661-bbf3-4dcf-b9ba-f948e278f31e">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#7e98856b-f41f-4437-be22-7cbcff9077f5">Verify Searching For Positions With Lat and Long.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#1810c7ab-e436-4d07-811b-3a9cae80691c">Verify Searching For Positions With Description, Location and Full Time.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#0f731ee0-0efb-47cb-95d1-6cb60915b4cb">Verify Searching For Positions With Description, Location and Full Time.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-danger">Failed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#d8d949d4-0bd3-4bb5-b9c6-822d84ea3c26">Verify Searching For Positions With Description, Location and Full Time.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-danger">Failed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#d1d72442-4840-4161-8de6-8f3e90557a82">Verify Searching For Positions With ZipCode.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#c0f5a096-14a3-4416-8407-6656d2be4123">Verify Searching For Positions With Description and Full Time.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#cedf0863-8ebe-45ce-a60f-1dc725ac168b">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#0227f0d1-da82-4346-b762-d147de920490">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-danger">Failed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#4c3180d2-07fb-4530-bb27-cd7087e0b892">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-danger">Failed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#57e278ea-26a0-4cb9-97fb-55f71425794a">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#ac6447fe-07ca-4887-8518-3acc0eba8080">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#c14a8bf1-8079-477d-9f05-8ca48a0fe420">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#f39d3abe-5f9a-4d7d-9384-81f8379d2abd">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#131728a5-f529-4ff3-867c-3607feb61514">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#e9fbe137-9bfa-468c-92a4-a96d1bef6a63">Verify Searching For Positions With ZipCode.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#9342bd47-68f3-4c88-a7c7-8ce6db1a6f47">Verify Searching For Positions With ZipCode.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#0fd61b81-c49d-4830-91fc-01b445f9aeb6">Verify Searching For Positions With Description, Location and Full Time.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#177706ba-5897-4daf-b771-4f4f93fc804a">Verify Searching For Positions With Lat and Long.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#3f432dd9-73f7-4e9e-b029-5c99b8ff987c">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#5e94d08a-999f-4162-8a2b-483701c32b9d">Verify Searching For Positions With Description and Full Time.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#d8287c21-94aa-4209-b371-595c04704db6">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#57aa29cf-e33c-4bf5-a5ea-9f2add49e22b">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#7db46ab5-c58f-43ae-a6e6-2c0f0c9c317c">Verify Searching For Positions With Description, Location and Full Time.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#23f85042-a14e-4f07-8e73-94ec99a526aa">Verify Searching For Positions With Description, Location and Full Time.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#f3e400b0-5c6b-4673-9815-2ba307422deb">Verify Searching For Positions With Lat and Long.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-success">Passed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#e05cd55f-f6b3-44df-aa28-2ee25f0e0978">Verify Searching For Positions With Description, Location and Full Time.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-danger">Failed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#28466315-7bce-4c8b-92de-f11a6fe8cd97">Verify Searching For Positions With Description.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-danger">Failed</span>
+                                    </td>
+                                </tr>
+<tr>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#753d799b-2ae0-4c7e-b65f-52d480bf27b2">Verify Searching For Positions With Description, Location and Full Time.</a>
+                                    </td>
+                                    <td>
+                                        <span class="float-left badge badge-danger">Failed</span>
+                                    </td>
+                                </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+    <!-- Modals -->
+    <div class="modal fade" id="8ad49f4f-cb72-4f26-8dd0-377fb525b447" tabindex="-1" role="dialog" aria-labelledby="8ad49f4f-cb72-4f26-8dd0-377fb525b447" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 22</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">5 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">2 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call Salesforce Engineer API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3003 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Salesforce Engineer is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">25 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="592b5638-a273-4fe3-aaf1-596aa5ae8810" tabindex="-1" role="dialog" aria-labelledby="592b5638-a273-4fe3-aaf1-596aa5ae8810" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 23</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call Remote Web Developer API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">4404 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Remote Web Developer is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">125 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="da21b69e-cb5f-45e1-9552-f20efb951f46" tabindex="-1" role="dialog" aria-labelledby="da21b69e-cb5f-45e1-9552-f20efb951f46" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Lat and Long.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 62</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">25 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call with 41.8781 as Lat and 87.6298 as Long.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3463 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Chicago is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">6 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">1 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="046f8dd8-cc37-44a2-8a36-8f2bf8c6a5a0" tabindex="-1" role="dialog" aria-labelledby="046f8dd8-cc37-44a2-8a36-8f2bf8c6a5a0" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 18</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">28 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">1 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call Remote IOS API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3614 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Remote IOS is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">131 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="e2490cd5-e620-4edb-8b07-80f3021316be" tabindex="-1" role="dialog" aria-labelledby="e2490cd5-e620-4edb-8b07-80f3021316be" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 25</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">5 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call Remote Web Developer JavaScript API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3884 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Remote Web Developer JavaScript is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">61 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="ca20a321-9569-495c-82fa-9cf7d86a131b" tabindex="-1" role="dialog" aria-labelledby="ca20a321-9569-495c-82fa-9cf7d86a131b" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 20</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">4 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">17 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call DevOps Engineer API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">4213 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords DevOps Engineer is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">110 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">59 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="72fcaa30-aa4b-46f6-b584-62dbad630694" tabindex="-1" role="dialog" aria-labelledby="72fcaa30-aa4b-46f6-b584-62dbad630694" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 15</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">12 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">6 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call Web developer API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">6206 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Web developer is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">271 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="f9ccf10e-6f13-476d-a71c-0fb044c3dbc0" tabindex="-1" role="dialog" aria-labelledby="f9ccf10e-6f13-476d-a71c-0fb044c3dbc0" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Lat and Long.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 58</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call with 111111111 as Lat and 111111111 as Long.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">2959 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords  is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">16 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">1 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="f1fe7661-bbf3-4dcf-b9ba-f948e278f31e" tabindex="-1" role="dialog" aria-labelledby="f1fe7661-bbf3-4dcf-b9ba-f948e278f31e" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 11</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">32 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">11 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call java API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">4243 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords java is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">90 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="7e98856b-f41f-4437-be22-7cbcff9077f5" tabindex="-1" role="dialog" aria-labelledby="7e98856b-f41f-4437-be22-7cbcff9077f5" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Lat and Long.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 60</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">6 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call with 00000000 as Lat and 00000000 as Long.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3643 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords  is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">7 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="1810c7ab-e436-4d07-811b-3a9cae80691c" tabindex="-1" role="dialog" aria-labelledby="1810c7ab-e436-4d07-811b-3a9cae80691c" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description, Location and Full Time.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 46</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">18 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call with java as description, location Universal City and true as full time.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3318 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Universal City is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">38 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="0f731ee0-0efb-47cb-95d1-6cb60915b4cb" tabindex="-1" role="dialog" aria-labelledby="0f731ee0-0efb-47cb-95d1-6cb60915b4cb" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description, Location and Full Time.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 45</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">4 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call with java as description, location New York and false as full time.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">4829 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords New York is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">46 ms</span>
+<span class="badge badge-danger">Failed</span>
+</span>
+</div>
+</div>
+<div class="row mt-2">
+<div class="col-lg-12 text-danger" style="overflow-wrap:break-word;">
+java.lang.AssertionError: Not Found : New York
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at cucumberSteps.JobsSearch.verify(JobsSearch.java:99)
+	at ✽.From API response , validate all search keywords New York is displayed.(src/test/resources/cucumber-features/JobsSearch.feature:41)
+
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="d8d949d4-0bd3-4bb5-b9c6-822d84ea3c26" tabindex="-1" role="dialog" aria-labelledby="d8d949d4-0bd3-4bb5-b9c6-822d84ea3c26" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description, Location and Full Time.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 49</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">2 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call with java as description, location Chicago and false as full time.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3941 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Chicago is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">17 ms</span>
+<span class="badge badge-danger">Failed</span>
+</span>
+</div>
+</div>
+<div class="row mt-2">
+<div class="col-lg-12 text-danger" style="overflow-wrap:break-word;">
+java.lang.AssertionError: Not Found : Chicago
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at cucumberSteps.JobsSearch.verify(JobsSearch.java:99)
+	at ✽.From API response , validate all search keywords Chicago is displayed.(src/test/resources/cucumber-features/JobsSearch.feature:41)
+
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="d1d72442-4840-4161-8de6-8f3e90557a82" tabindex="-1" role="dialog" aria-labelledby="d1d72442-4840-4161-8de6-8f3e90557a82" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With ZipCode.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 70</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">134 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">1 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job API call with 60007 API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">4256 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Chicago is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">8 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="c0f5a096-14a3-4416-8407-6656d2be4123" tabindex="-1" role="dialog" aria-labelledby="c0f5a096-14a3-4416-8407-6656d2be4123" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description and Full Time.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 36</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">2 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call with java as description and true as full time.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">7337 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords java is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">120 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="cedf0863-8ebe-45ce-a60f-1dc725ac168b" tabindex="-1" role="dialog" aria-labelledby="cedf0863-8ebe-45ce-a60f-1dc725ac168b" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 13</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">2 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call Android API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">4282 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Android is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">158 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="0227f0d1-da82-4346-b762-d147de920490" tabindex="-1" role="dialog" aria-labelledby="0227f0d1-da82-4346-b762-d147de920490" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 10</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">2 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">4 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call ruby API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">5569 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords ruby is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">160 ms</span>
+<span class="badge badge-danger">Failed</span>
+</span>
+</div>
+</div>
+<div class="row mt-2">
+<div class="col-lg-12 text-danger" style="overflow-wrap:break-word;">
+java.lang.AssertionError: Not Found : ruby
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at cucumberSteps.JobsSearch.verify(JobsSearch.java:99)
+	at ✽.From API response , validate all search keywords ruby is displayed.(src/test/resources/cucumber-features/JobsSearch.feature:6)
+
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="4c3180d2-07fb-4530-bb27-cd7087e0b892" tabindex="-1" role="dialog" aria-labelledby="4c3180d2-07fb-4530-bb27-cd7087e0b892" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 12</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">1 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call ios API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">4664 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords ios is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">143 ms</span>
+<span class="badge badge-danger">Failed</span>
+</span>
+</div>
+</div>
+<div class="row mt-2">
+<div class="col-lg-12 text-danger" style="overflow-wrap:break-word;">
+java.lang.AssertionError: Not Found : ios
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at cucumberSteps.JobsSearch.verify(JobsSearch.java:99)
+	at ✽.From API response , validate all search keywords ios is displayed.(src/test/resources/cucumber-features/JobsSearch.feature:6)
+
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">1 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="57e278ea-26a0-4cb9-97fb-55f71425794a" tabindex="-1" role="dialog" aria-labelledby="57e278ea-26a0-4cb9-97fb-55f71425794a" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 24</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">11 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call Remote Web Developer HTML API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">4109 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Remote Web Developer HTML is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">206 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="ac6447fe-07ca-4887-8518-3acc0eba8080" tabindex="-1" role="dialog" aria-labelledby="ac6447fe-07ca-4887-8518-3acc0eba8080" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 19</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">1 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call Remote Android API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">5076 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Remote Android is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">15 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="c14a8bf1-8079-477d-9f05-8ca48a0fe420" tabindex="-1" role="dialog" aria-labelledby="c14a8bf1-8079-477d-9f05-8ca48a0fe420" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 27</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">15 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">2 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call Not Valid API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3715 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Not Valid is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">97 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="f39d3abe-5f9a-4d7d-9384-81f8379d2abd" tabindex="-1" role="dialog" aria-labelledby="f39d3abe-5f9a-4d7d-9384-81f8379d2abd" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 14</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">5 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call Android developer API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">4395 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Android developer is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">98 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="131728a5-f529-4ff3-867c-3607feb61514" tabindex="-1" role="dialog" aria-labelledby="131728a5-f529-4ff3-867c-3607feb61514" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 17</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call objc API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">2822 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords objc is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">11 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="e9fbe137-9bfa-468c-92a4-a96d1bef6a63" tabindex="-1" role="dialog" aria-labelledby="e9fbe137-9bfa-468c-92a4-a96d1bef6a63" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With ZipCode.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 69</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">5 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job API call with 10010 API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">4261 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords New York is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">5 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="9342bd47-68f3-4c88-a7c7-8ce6db1a6f47" tabindex="-1" role="dialog" aria-labelledby="9342bd47-68f3-4c88-a7c7-8ce6db1a6f47" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With ZipCode.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 71</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job API call with 00000000090909090909090909 API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3099 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords  is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">4 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="0fd61b81-c49d-4830-91fc-01b445f9aeb6" tabindex="-1" role="dialog" aria-labelledby="0fd61b81-c49d-4830-91fc-01b445f9aeb6" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description, Location and Full Time.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 47</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call with java as description, location Universal City and false as full time.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">2350 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Universal City is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">4 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">1 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="177706ba-5897-4daf-b771-4f4f93fc804a" tabindex="-1" role="dialog" aria-labelledby="177706ba-5897-4daf-b771-4f4f93fc804a" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Lat and Long.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 59</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">7 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call with -111111111 as Lat and -111111111 as Long.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">5423 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords  is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">14 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">7 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="3f432dd9-73f7-4e9e-b029-5c99b8ff987c" tabindex="-1" role="dialog" aria-labelledby="3f432dd9-73f7-4e9e-b029-5c99b8ff987c" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 26</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">2 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">1 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call Remote Web Developer JavaScript HTML/CSS API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3036 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Remote Web Developer JavaScript HTML/CSS is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">48 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="5e94d08a-999f-4162-8a2b-483701c32b9d" tabindex="-1" role="dialog" aria-labelledby="5e94d08a-999f-4162-8a2b-483701c32b9d" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description and Full Time.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 37</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">5 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call with java as description and false as full time.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">5906 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords java is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">143 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="d8287c21-94aa-4209-b371-595c04704db6" tabindex="-1" role="dialog" aria-labelledby="d8287c21-94aa-4209-b371-595c04704db6" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 16</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">6 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">1 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call swift API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">4307 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords swift is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">100 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="57aa29cf-e33c-4bf5-a5ea-9f2add49e22b" tabindex="-1" role="dialog" aria-labelledby="57aa29cf-e33c-4bf5-a5ea-9f2add49e22b" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 9</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">9 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call developer API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">5272 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords developer is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">116 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="7db46ab5-c58f-43ae-a6e6-2c0f0c9c317c" tabindex="-1" role="dialog" aria-labelledby="7db46ab5-c58f-43ae-a6e6-2c0f0c9c317c" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description, Location and Full Time.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 51</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">19 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call with java as description, location Remote and false as full time.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3835 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Remote is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">25 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="23f85042-a14e-4f07-8e73-94ec99a526aa" tabindex="-1" role="dialog" aria-labelledby="23f85042-a14e-4f07-8e73-94ec99a526aa" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description, Location and Full Time.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 50</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">59 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">2 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call with java as description, location Remote and true as full time.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3806 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Remote is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">120 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">1 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="f3e400b0-5c6b-4673-9815-2ba307422deb" tabindex="-1" role="dialog" aria-labelledby="f3e400b0-5c6b-4673-9815-2ba307422deb" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Lat and Long.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 61</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">2 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call with 40.7128 as Lat and 74.0060 as Long.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">2909 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords New York is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">5 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="e05cd55f-f6b3-44df-aa28-2ee25f0e0978" tabindex="-1" role="dialog" aria-labelledby="e05cd55f-f6b3-44df-aa28-2ee25f0e0978" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description, Location and Full Time.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 48</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">25 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call with java as description, location Chicago and true as full time.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">2699 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Chicago is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">22 ms</span>
+<span class="badge badge-danger">Failed</span>
+</span>
+</div>
+</div>
+<div class="row mt-2">
+<div class="col-lg-12 text-danger" style="overflow-wrap:break-word;">
+java.lang.AssertionError: Not Found : Chicago
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at cucumberSteps.JobsSearch.verify(JobsSearch.java:99)
+	at ✽.From API response , validate all search keywords Chicago is displayed.(src/test/resources/cucumber-features/JobsSearch.feature:41)
+
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="28466315-7bce-4c8b-92de-f11a6fe8cd97" tabindex="-1" role="dialog" aria-labelledby="28466315-7bce-4c8b-92de-f11a6fe8cd97" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 21</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">2 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">2 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call Senior PHP Developer API.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3337 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords Senior PHP Developer is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">52 ms</span>
+<span class="badge badge-danger">Failed</span>
+</span>
+</div>
+</div>
+<div class="row mt-2">
+<div class="col-lg-12 text-danger" style="overflow-wrap:break-word;">
+java.lang.AssertionError: Not Found : Senior PHP Developer
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at cucumberSteps.JobsSearch.verify(JobsSearch.java:99)
+	at ✽.From API response , validate all search keywords Senior PHP Developer is displayed.(src/test/resources/cucumber-features/JobsSearch.feature:6)
+
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="753d799b-2ae0-4c7e-b65f-52d480bf27b2" tabindex="-1" role="dialog" aria-labelledby="753d799b-2ae0-4c7e-b65f-52d480bf27b2" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-white bg-dark">
+<span class="modal-title"><h5>Verify Searching For Positions With Description, Location and Full Time.</h5>
+<div class="font-italic text-muted">JobsSearch.feature - line 44</div></span>
+<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">34 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.beforeScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+When From git hub job search API call with java as description, location New York and true as full time.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">3239 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Then From API response , validate all search keywords New York is displayed.
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">49 ms</span>
+<span class="badge badge-danger">Failed</span>
+</span>
+</div>
+</div>
+<div class="row mt-2">
+<div class="col-lg-12 text-danger" style="overflow-wrap:break-word;">
+java.lang.AssertionError: Not Found : New York
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at cucumberSteps.JobsSearch.verify(JobsSearch.java:99)
+	at ✽.From API response , validate all search keywords New York is displayed.(src/test/resources/cucumber-features/JobsSearch.feature:41)
+
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Assert.afterScenario()
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-lg-9" style="overflow-wrap:break-word;">
+Hooks.afterScenario(Scenario)
+</div>
+<div class="col-lg-3">
+<span class="float-right">
+<span class="badge badge-info">0 ms</span>
+<span class="badge badge-success">Passed</span>
+</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+
+
+</div>
+<!-- /.content-wrapper -->
+
+<!-- Bootstrap core JavaScript -->
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/jquery.dataTables.js"></script>
+<script src="js/dataTables.bootstrap4.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="js/core.min.js"></script>
+<script src="js/mdb.js"></script>
+<script src="js/Chart.min.js"></script>
+
+<script>
+    var passed = $('#card-passed').text();
+    var failed = $('#card-failed').text();
+    var rerun = $('#card-rerun').text();
+
+    var ctxP = document.getElementById("pieChart").getContext('2d');
+    var pieChart = new Chart(ctxP, {
+        type: 'pie',
+        data: {
+            labels: ["Passed", "Failed", "Re-run"],
+            datasets: [{
+                data: [passed, failed, rerun],
+                backgroundColor: ["#28a745", "#dc3545", "#ffbb33"]
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+</script>
+
+<script>
+    function setSearch(criteria) {
+        var search = "\"" + criteria + "\"";
+        if (criteria.length < 2) {
+            search = ''
+        }
+        $("input[type='search']").val(search).trigger($.Event("keyup", {keyCode: 13}));
+    }
+</script>
+
+</body>
+
+</html>

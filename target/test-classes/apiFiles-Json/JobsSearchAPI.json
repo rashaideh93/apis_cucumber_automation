@@ -1,0 +1,14 @@
+{
+	"defaultHost": "https://jobs.github.com/positions.json",
+	"defaultHttpMethod":"GET",
+	"defaultContentType":"application/json",
+	"defaultRequestHeaders": [],
+	"services" :
+	[
+		{
+			"name": "JOB_DESCRIPTION",
+			"url": "{PLACE_HOLDER}"
+		}
+
+	]
+}

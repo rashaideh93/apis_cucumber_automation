@@ -1,0 +1,12 @@
+Feature: Verify Job Search API
+
+  Scenario Outline: Verify Searching For Positions With Description, Location and Full Time. # src/test/resources/cucumber-features/JobsSearch.feature:39
+    When From git hub job search API call with <Description> as description, location <Location> and <Full_Time> as full time.
+    Then From API response , validate all search keywords <Location> is displayed.
+
+    Examples: 
+
+  Scenario Outline: Verify Searching For Positions With Descripti    When From git hub job search API call Salesforce Engineer API.                          # JobsSearch.getResultsWithDescription(String)
+    Then From API response , validate all search keywords Salesforce Engineer is displayed. # JobsSearch.verify(String)
+riptionAndFullTime(String,String,String)
+    Then From API response , validate all search keywords Universal City is displayed.                              # JobsSearch.verify(String)

@@ -1,0 +1,44 @@
+[
+  {
+    "source": "^From git hub job search API call (.*) API\\.$",
+    "steps": [
+      {
+        "name": "From git hub job search API call Salesforce Engineer API.",
+        "aggregatedDurations": {
+          "average": 3.003883031,
+          "median": 3.003883031
+        },
+        "durations": [
+          {
+            "duration": 3.003883031,
+            "location": "src/test/resources/cucumber-features/JobsSearch.feature:5"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "source": "^From API response , validate all search keywords (.*) is displayed\\.$",
+    "steps": [
+      {
+        "name": "From API response , validate all search keywords Salesforce Engineer is displayed.",
+        "aggregatedDurations": {
+          "average": 0.025491513,
+          "median": 0.025491513
+        },
+        "durations": [
+          {
+            "duration": 0.025491513,
+            "location": "src/test/resources/cucumber-features/JobsSearch.feature:6"
+          }
+        ]
+      }
+    ]
+  }
+]c/test/resources/cucumber-features/JobsSearch.feature:41"
+          }
+        ]
+      }
+    ]
+  }
+]

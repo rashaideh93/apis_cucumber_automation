@@ -1,0 +1,7 @@
+src/test/resources/cucumber-features/JobsSearch.feature:10
+src/test/resources/cucumber-features/JobsSearch.feature:12
+src/test/resources/cucumber-features/JobsSearch.feature:21
+src/test/resources/cucumber-features/JobsSearch.feature:44
+src/test/resources/cucumber-features/JobsSearch.feature:45
+src/test/resources/cucumber-features/JobsSearch.feature:48
+src/test/resources/cucumber-features/JobsSearch.feature:49
